@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento Edigner bar´s</title>
+    <link rel="stylesheet" href="">
+</head>
+</head>
+
+<body>
+    <div id="modal-root">
+        <h1>Evento Edigner bar´s</h1>
+        <section id="form-section">
+            <form id="event-form">
+                <div class="form__field">
+                    <label for="event-name">Nombre completo:</label>
+                    <input type="text" id="event-name" name="event-name" required>
+                </div>
+
+                <div class="form__field">
+                    <label for="event-email">Correo electrónico:</label>
+                    <input type="email" id="event-email" name="event-email" required>
+
+                </div>
+                <div class="form__field">
+                    <label for="event-job">Cargo:</label>
+                    <input type="text" id="event-job" name="event-job" required>
+                </div>
+
+                <div class="form__field">
+                    <label for="category">Area/Departamento:</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Diseño">Diseño</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Ventas">Ventas</option>
+                        <option value="RRHH">RRHH</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form__field">
+                    <label for="event-assistance">Tipo de asistencia:</label>
+                    <input type="radio" id="event-assistance" name="event-assistance" value="Presencial" required>
+                    <label for="event-assistance">Presencial</label>
+                    <input type="radio" id="event-assistance" name="event-assistance" value="Virtual" required>
+                    <label for="event-assistance">Virtual</label>
+                </div>
+
+                <div id="option_virtual" style="display: none;">
+                    <label for="event-platform">Plataforma de asistencia:</label>
+                    <input type="text" id="event-platform" name="event-platform" required>
+                </div>
+
+                <div id="option_presencial" style="display: none;">
+                    <label for="category">Talla:</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+
+                <button type="submit">Limpiar</button>
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+    </div>
+
+</body>
+
+</html>
