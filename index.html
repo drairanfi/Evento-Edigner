@@ -2,78 +2,122 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evento Edigner bar´s</title>
-    <link rel="stylesheet" href="">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evento Edigner bar´s</title>
+  <link rel="stylesheet" href="css/base.css">
 </head>
 
 <body>
-    <div id="modal-root">
-        <h1>Evento Edigner bar´s</h1>
-        <section id="form-section">
-            <form id="event-form">
-                <div class="form__field">
-                    <label for="event-name">Nombre completo:</label>
-                    <input type="text" id="event-name" name="event-name" required>
-                </div>
+  <header class="app-header">
+    <h1>Evento Edigner bar´s</h1>
+  </header>
+  <main class="app-layout">
+    <section id="dashboard" class="dashboard">
+      <!-- contenido dashboard -->
+    </section>
+  </main>
+  <div id="modal-root">
+    <div class="modal" id="modal-form" hidden>
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__box">
+        <button type="button" class="modal__close" data-close aria-label="Cerrar">&times;</button>
+        <form id="event-form" class="form" novalidate>
+          <div class="form__field">
+            <label class="form__label" for="input-nombre">Nombre completo</label>
+            <input class="form__input" type="text" id="input-nombre" name="nombre" autocomplete="off">
+            <span class="form__error" data-error="nombre"></span>
+            <!-- Espacio reservado para mostrar el error de este campo. Vacío por ahora. -->
+          </div>
+          <div class="form__field">
+            <label class="form__label" for="input-email">Correo electrónico</label>
+            <input class="form__input" type="email" id="input-email" name="email" autocomplete="off">
+            <span class="form__error" data-error="email"></span>
+          </div>
 
-                <div class="form__field">
-                    <label for="event-email">Correo electrónico:</label>
-                    <input type="email" id="event-email" name="event-email" required>
+          <div class="form__field">
+            <label class="form__label" for="input-cargo">Cargo</label>
+            <input class="form__input" type="text" id="input-cargo" name="cargo" autocomplete="off">
+            <span class="form__error" data-error="cargo"></span>
+          </div>
 
-                </div>
-                <div class="form__field">
-                    <label for="event-job">Cargo:</label>
-                    <input type="text" id="event-job" name="event-job" required>
-                </div>
+          <div class="form__field">
+            <label class="form__label" for="select-area">Área / Departamento</label>
+            <select class="form__select" id="select-area" name="area">
+              <option value="">Selecciona un área</option>
+              <option value="Tecnología">Tecnología</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Operaciones">Operaciones</option>
+              <option value="RRHH">RRHH</option>
+              <option value="Ventas">Ventas</option>
+              <option value="Finanzas">Finanzas</option>
+            </select>
+            <span class="form__error" data-error="area"></span>
+          </div>
 
-                <div class="form__field">
-                    <label for="category">Area/Departamento:</label>
-                    <select id="category" name="category" required>
-                        <option value="">Select category</option>
-                        <option value="Tecnologia">Tecnologia</option>
-                        <option value="Diseño">Diseño</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Ventas">Ventas</option>
-                        <option value="RRHH">RRHH</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
+          <div class="form__field">
+            <span class="form__legend">Tipo de asistencia</span>
+            <div class="form__radio-group">
+              <label class="form__radio">
+                <input class="form__radio-input" type="radio" name="tipoAsistencia" value="presencial">
+                <span class="form__radio-text">Presencial</span>
+              </label>
+              <label class="form__radio">
+                <input class="form__radio-input" type="radio" name="tipoAsistencia" value="virtual">
+                <span class="form__radio-text">Virtual</span>
+              </label>
+            </div>
+            <p id="mensaje-cupos" class="form__cupos-msg" hidden>
+              No hay cupos presenciales disponibles.
+            </p>
+            <span class="form__error" data-error="tipoAsistencia"></span>
+          </div>
 
-                <div class="form__field">
-                    <label for="event-assistance">Tipo de asistencia:</label>
-                    <input type="radio" id="event-assistance" name="event-assistance" value="Presencial" required>
-                    <label for="event-assistance">Presencial</label>
-                    <input type="radio" id="event-assistance" name="event-assistance" value="Virtual" required>
-                    <label for="event-assistance">Virtual</label>
-                </div>
+          <div class="form__field form__field--conditional" id="grupo-talla" hidden>
+            <label class="form__label" for="select-talla">Talla de camiseta</label>
+            <select class="form__select" id="select-talla" name="tallaCamisa">
+              <option value="">Selecciona una talla</option>
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+            <span class="form__error" data-error="tallaCamisa"></span>
+          </div>
 
-                <div id="option_virtual" style="display: none;">
-                    <label for="event-platform">Plataforma de asistencia:</label>
-                    <input type="text" id="event-platform" name="event-platform" required>
-                </div>
+          <div class="form__field form__field--conditional" id="grupo-plataforma" hidden>
+            <label class="form__label" for="input-plataforma">Plataforma de reunión preferida</label>
+            <input class="form__input" type="text" id="input-plataforma" name="plataforma"
+              placeholder="Zoom, Teams, Meet…" autocomplete="off">
+            <span class="form__error" data-error="plataforma"></span>
+          </div>
 
-                <div id="option_presencial" style="display: none;">
-                    <label for="category">Talla:</label>
-                    <select id="category" name="category" required>
-                        <option value="">Select category</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-                </div>
-
-                <button type="submit">Limpiar</button>
-                <button type="submit">Registrar</button>
-            </form>
-        </section>
+          <div class="form__actions">
+            <button id="reset-btn" type="reset" class="form__button form__button--secondary">Limpiar</button>
+            <button id="submit-btn" type="submit" class="form__button form__button--primary">Registrar</button>
+          </div>
+        </form>
+      </div>
     </div>
 
+    <div class="modal" id="modal-list" hidden>
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__box">
+        <button type="button" class="modal__close" data-close aria-label="Cerrar">&times;</button>
+        <section id="list-section">
+          <h2>Registrados</h2>
+          <div id="list-container" class="list">
+            <!-- registros -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="js/main.js"></script>
 </body>
-
+</div>
+</div>
+</body>
 </html>
