@@ -1,8 +1,9 @@
-import { addRecord } from "../core/store.js";
+import { addRecord, registros } from "../core/store.js";
 import { renderDashboard } from "./dashboard.js";
 import { renderList } from "./list.js";
 import { closeModal } from "./modal.js";
 import { validateRegistro } from "../core/validators.js";
+import { hayCupoPresencial } from "../core/businessRules.js";
 
 export function initForm() {
   const form = document.getElementById("event-form");
@@ -10,6 +11,7 @@ export function initForm() {
 
   const grupoTalla = document.getElementById("grupo-talla");
   const grupoPlataforma = document.getElementById("grupo-plataforma");
+  const mensajeCupos = document.getElementById("mensaje-cupos");
   const radios = document.querySelectorAll('input[name="tipoAsistencia"]');
 
 
@@ -17,6 +19,7 @@ export function initForm() {
     radio.addEventListener("change", () => {
       grupoTalla.hidden = radio.value !== "presencial";
       grupoPlataforma.hidden = radio.value !== "virtual";
+      mensajeCupos.hidden = !(radio.value === "presencial" && !hayCupoPresencial(registros));
     });
   });
 
@@ -42,6 +45,10 @@ export function initForm() {
     };
 
     const errors = validateRegistro(registro);
+    if (registro.tipoAsistencia === "presencial" && !hayCupoPresencial(registros)) {
+      errors.tipoAsistencia = "No hay cupos presenciales disponibles.";
+    }
+
     pintarErrores(form, errors);
     if (Object.keys(errors).length > 0) return;
 
