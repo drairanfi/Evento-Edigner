@@ -41,12 +41,10 @@ export function initForm() {
       estado: "pendiente",
     };
 
-    // 1) Validamos. Si hay errores, los pintamos y frenamos: no se guarda nada.
     const errors = validateRegistro(registro);
     pintarErrores(form, errors);
     if (Object.keys(errors).length > 0) return;
 
-    // 2) Todo válido: recién acá guardamos y actualizamos la UI.
     addRecord(registro);
     renderDashboard();
     renderList();
@@ -56,7 +54,6 @@ export function initForm() {
   });
 }
 
-// Pinta cada mensaje en su <span data-error="..."> y marca el input en rojo.
 function pintarErrores(form, errors) {
   limpiarErrores(form);
 
@@ -69,7 +66,6 @@ function pintarErrores(form, errors) {
   });
 }
 
-// Borra todos los mensajes y quita las marcas rojas.
 function limpiarErrores(form) {
   form.querySelectorAll("[data-error]").forEach((span) => {
     span.textContent = "";
