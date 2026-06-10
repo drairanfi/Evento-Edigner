@@ -2,6 +2,7 @@ import { registros, deleteRecord, changeStatus } from "../core/store.js";
 import { renderDashboard } from "./dashboard.js";
 
 const ESTADOS = ["pendiente", "confirmado", "cancelado"];
+let pagina = 1;
 
 export function initList() {
   const container = document.getElementById("list-container");
@@ -22,12 +23,58 @@ export function initList() {
     renderList();
     renderDashboard();
   });
+
+  ["list-search", "filter-tipo", "filter-estado"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", () => {
+      pagina = 1;
+      renderList();
+    });
+  });
+
+  document.getElementById("list-pagination").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-pagina]");
+    if (!btn) return;
+    pagina = Number(btn.dataset.pagina);
+    renderList();
+  });
 }
 
 export function renderList() {
   const container = document.getElementById("list-container");
   if (!container) return;
-  container.innerHTML = registros.map(cardHTML).join("");
+
+  const texto = document.getElementById("list-search").value.toLowerCase();
+  const tipo = document.getElementById("filter-tipo").value;
+  const estado = document.getElementById("filter-estado").value;
+
+  const filtrados = registros.filter((r) =>
+    r.nombre.toLowerCase().includes(texto) &&
+    (tipo === "" || r.tipoAsistencia === tipo) &&
+    (estado === "" || r.estado === estado)
+  );
+
+  const inicio = (pagina - 1) * 10;
+  const visibles = filtrados.slice(inicio, inicio + 10);
+
+  container.innerHTML = visibles.map(cardHTML).join("");
+  renderPaginas(filtrados.length);
+}
+
+function renderPaginas(total) {
+  const cont = document.getElementById("list-pagination");
+  const paginas = Math.ceil(total / 10);
+
+  if (paginas <= 1) {
+    cont.innerHTML = "";
+    return;
+  }
+
+  let html = "";
+  for (let i = 1; i <= paginas; i++) {
+    const activa = i === pagina ? "list__page--active" : "";
+    html += `<button type="button" class="list__page ${activa}" data-pagina="${i}">${i}</button>`;
+  }
+  cont.innerHTML = html;
 }
 
 function cardHTML(r) {

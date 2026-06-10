@@ -21,7 +21,6 @@ export function renderDashboard() {
         <button type="button" id="btn-nuevo" class="form__button form__button--primary">Nuevo registro</button>
       </div>
     </div>
-
     <div class="dashboard__stats">
       ${statCard("Total registrados", pad(total))}
       ${statCard("Cupos presenciales", `${pad(presenciales)} / ${CUPOS_PRESENCIALES}`)}

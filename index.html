@@ -14,7 +14,7 @@
   </header>
   <main class="app-layout">
     <section id="dashboard" class="dashboard">
-      <!-- contenido dashboard -->
+    <!-- contenido -->
     </section>
   </main>
   <div id="modal-root">
@@ -107,16 +107,30 @@
         <button type="button" class="modal__close" data-close aria-label="Cerrar">&times;</button>
         <section id="list-section">
           <h2>Registrados</h2>
+          <div class="list__filters">
+            <input type="search" id="list-search" class="form__input" placeholder="Buscar por nombre, correo o cargo…"
+              autocomplete="off">
+            <select id="filter-tipo" class="form__select">
+              <option value="">Todos los tipos</option>
+              <option value="presencial">Presencial</option>
+              <option value="virtual">Virtual</option>
+            </select>
+            <select id="filter-estado" class="form__select">
+              <option value="">Todos los estados</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
           <div id="list-container" class="list">
             <!-- registros -->
           </div>
+          <div id="list-pagination" class="list__pagination"></div>
         </section>
       </div>
     </div>
   </div>
   <script type="module" src="js/main.js"></script>
 </body>
-</div>
-</div>
-</body>
-</html>
+
+</html>∏

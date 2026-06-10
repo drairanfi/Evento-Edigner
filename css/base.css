@@ -52,4 +52,12 @@ h1{
 
 }
 
+@media(max-width: 425px){
+h1{
+    width: 350px;
+    margin-left: -12px;
+
+}
+}
+
 

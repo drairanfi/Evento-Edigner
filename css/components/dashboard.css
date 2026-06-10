@@ -71,7 +71,7 @@
 .dashboard__panel-title {
     margin: 0 0 var(--space-md);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .dashboard__row {
@@ -79,6 +79,7 @@
     justify-content: space-between;
     padding: var(--space-sm) 0;
     color: var(--color-text);
+    font-weight: bold;
 }
 
 .dashboard__row-value {
